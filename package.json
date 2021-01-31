@@ -1,0 +1,25 @@
+{
+  "name": "employee-management-system",
+  "version": "1.0.0",
+  "description": "## Description ![License](https://img.shields.io/badge/License-BSD%202--Clause-blue.svg)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nard1n/employee-management-system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nard1n/employee-management-system/issues"
+  },
+  "homepage": "https://github.com/nard1n/employee-management-system#readme",
+  "dependencies": {
+    "inquirer": "^6.3.1",
+    "mysql": "^2.18.1"
+  }
+}
