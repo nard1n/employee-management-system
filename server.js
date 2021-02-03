@@ -26,8 +26,7 @@ function runSearch() {
                 "View all employees by manager",
                 "Add a new item (employee, role, or department)",
                 "Remove Employee",
-                "Update Employee Role",
-                "Update Employee Manager"
+                "Update Employee Role"
             ]
         }
     ).then(function (answer) {
@@ -54,10 +53,6 @@ function runSearch() {
 
             case "Update Employee Role":
                 updateRole();
-                break;
-
-            case "Update Employee Manager":
-                updateMgr();
                 break;
         }
     });
@@ -238,11 +233,72 @@ function addDepartment(){
 }
 
 function rmEmployee() {
-    inquirer.prompt({
-        name: "confirm",
-        type: "confirm",
-        message: "Are you sure you want to permanently remove an employee?"
-    })
+        // make it async wiht const { verify } = await inquirer.prompt({
+        //     name: "confirm",
+        //     type: "confirm",
+        //     message: "Are you sure you want to permanently remove an employee?",
+        //     default: false
+        // });
+        // if (!verify.name.confirm) {
+        //     //function emplToDlt () {
+
+        inquirer.prompt([
+            {
+                name: "first_name",
+                type: "input",
+                message: "What is the first name of employee?"
+            },
+            {
+                name: "last_name",
+                type : "input",
+                message: "What is the last name of employee?"
+            }
+        ]).then(function(answer){
+            connection.query(
+                "DELETE FROM employee WHERE ? AND ?",
+                [{
+                    first_name: answer.first_name
+                },
+                {
+                    last_name: answer.last_name
+                }]
+            );
+        console.log("Employee has been removed from database");
+        runSearch();
+    });
 }
-function updateRole() {}
-function updateMgr() {}
+
+function updateRole() {
+    inquirer.prompt([
+        {
+            name: 'first_name',
+            type: 'input',
+            message: "First name of employee you are updating today?"
+        },
+        {
+            name: 'last_name',
+            type: 'input',
+            message: "Last name of employee you are updating today?"
+        },
+        {
+            name: "role_id",
+            type: 'number',
+            message: 'What is their new role id?'
+        }
+    ]).then(function(answer){
+        connection.query (
+            "UPDATE employee SET ? WHERE ? AND ?",
+            [{
+                role_id: answer.role_id            
+            },
+            {
+                first_name: answer.first_name
+            },
+            {
+                last_name: answer.last_name
+            }]
+        );
+        console.log("Employee role has been updated");
+        runSearch();
+    });
+}
