@@ -64,7 +64,7 @@ function runSearch() {
 }
 
 function allEmployees() {
-    let query = "SELECT * FROM employee";
+    let query = "SELECT id, first_name AS 'First Name', last_name AS 'Last Name', role_id AS 'Role Id', manager_id AS 'Manager Id' FROM employee";
     connection.query(query, function (err, res) {
         if (err) throw err;
         console.table(res);
@@ -237,6 +237,12 @@ function addDepartment(){
     });
 }
 
-function rmEmployee() {}
+function rmEmployee() {
+    inquirer.prompt({
+        name: "confirm",
+        type: "confirm",
+        message: "Are you sure you want to permanently remove an employee?"
+    })
+}
 function updateRole() {}
 function updateMgr() {}
