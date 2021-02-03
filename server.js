@@ -211,7 +211,31 @@ function addRole(){
         runSearch();
     });
 }
-function addDepartment(){}
+
+function addDepartment(){
+    inquirer.prompt([
+        {
+            name: "dpt_name",
+            type: "input",
+            message: "What is the name of the new department?"
+        },
+        {
+            name: "dpt_id",
+            type: "number",
+            message: "What is the ID number of the new department?"
+        }
+    ]).then(function(answer){
+        connection.query(
+            "INSERT INTO department SET ?",
+            {
+                id: answer.dpt_id,
+                dpt_name: answer.dpt_name
+            }
+        );
+        console.log("New department has been added to the database");
+        runSearch();
+    });
+}
 
 function rmEmployee() {}
 function updateRole() {}
