@@ -97,7 +97,16 @@ function emplByDept(){
 });
 }
 
-function emplByMgr() {}
+function emplByMgr() {
+    let query = "SELECT employee.first_name AS 'First Name', employee.last_name AS 'Last Name', manager_id AS 'ReportingManagerId'";
+    query += " FROM employee WHERE manager_id IS NOT NULL";
+    query += " ORDER BY employee.manager_id";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        runSearch();
+    });
+}
 
 function addEmployee() {
     inquirer.prompt([

@@ -1,20 +1,20 @@
 USE company_employees;
 
 -- Creates new rows containing data in all named columns --
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("John", "Doe", 1352, 72);
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ("John", "Doe", 1352);
 
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Mike", "Chan", 1354, 72);
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ("Mike", "Chan", 1354);
 
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Ashley", "Rodriguez", 1353, 72);
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ("Ashley", "Rodriguez", 1353);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("Kevin", "Tupik", 1356, 2);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Malia", "Brown", 1353, 72);
+VALUES ("Malia", "Brown", 1353, 1);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("Sarah", "Lourd", 1356, 3);
