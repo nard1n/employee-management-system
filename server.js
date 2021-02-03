@@ -24,7 +24,7 @@ function runSearch() {
                 "View all employees",
                 "View all employees by department",
                 "View all employees by manager",
-                "Add Employee",
+                "Add a new item (employee, role, or department)",
                 "Remove Employee",
                 "Update Employee Role",
                 "Update Employee Manager"
@@ -44,8 +44,8 @@ function runSearch() {
                 emplByMgr();
                 break;
 
-            case "Add Employee":
-                addEmployee();
+            case "Add a new item (employee, role, or department)":
+                addSomething();
                 break;
 
             case "Remove Employee":
@@ -108,84 +108,110 @@ function emplByMgr() {
     });
 }
 
-function addEmployee() {
-    inquirer.prompt([
-        {
+function addSomething() {
+    inquirer.prompt({
+            name: "action",
+            type: "list",
+            message: "What would you like to add?",
+            choices: [
+                "Add a new employee",
+                "Add a new department",
+                "Add a new role"
+            ]
+    }).then(function (answer) {
+        switch (answer.action) {
+            case "Add a new employee":
+                addEmployee();
+                break;
+
+            case "Add a new department":
+                addDepartment();
+                break;
+            
+            case "Add a new role":
+                addRole();
+                break;
+            }
+    });
+}
+
+function addEmployee(){
+    inquirer.prompt(
+        [
+            {
             name: "employee_firstname",
             type: "input",
             message: "What's the employee's first name?"
-        },
-        {
-            name: "employee_lastname",
-            type: "input",
-            message: "What's the employee's last name?"
-        },
-        {
-            name: "employee_role",
-            type: "number",
-            message: "What's the employee's role id?"
-        },
-        {
-            name: "employee_manager",
-            type: "number",
-            message: "Who does the employee report to?"
-        },
-        {
-            name: "employee_titleid",
-            type: "input",
-            message: "What's the employee's title ID?"
-        },
-        {
-            name: "employee_title",
-            type: "input",
-            message: "What's the employee's title?"
-        },
-        {
-            name: "employee_salary",
-            type: "number",
-            message: "What's the employee's annual salary?"
-        },
-        {
-            name: "employee_dptid",
-            type: "input",
-            message: "What's the employee's department ID?"
-        },
-        {
-            name: "employee_dpt",
-            type: "input",
-            message: "What department are they in?"
-        }
-    ]).then(function(answer) {
-        connection.query(
-            "INSERT INTO employee SET ?",
-            {
-                first_name: answer.employee_firstname,
-                last_name: answer.employee_lastname,
-                role_id: answer.employee_role,
-                manager_id: answer.employee_manager
             },
+            {
+                name: "employee_lastname",
+                type: "input",
+                message: "What's the employee's last name?"
+            },
+            {
+                name: "employee_role",
+                type: "number",
+                message: "What's the employee's role id?"
+            },
+            {
+                name: "employee_manager",
+                type: "number",
+                message: "Reports to Manager ID#"
+            }
+        ]
+        ).then(function(answer){
+            connection.query(
+                "INSERT INTO employee SET ?",
+                {
+                    first_name: answer.employee_firstname,
+                    last_name: answer.employee_lastname,
+                    role_id: answer.employee_role,
+                    manager_id: answer.employee_manager
+                });
+                console.log("New employee has been added to the database");
+                runSearch();
+        });
+}
+
+function addRole(){
+    inquirer.prompt(
+        [
+            {
+                name: "role_name",
+                type: "input",
+                message: "What would you like to name this new role?"
+            },
+            {
+                name: "role_id",
+                type: "input",
+                message: "Which ID would you like to assign to this role?"
+            },
+            {
+                name: "salary",
+                type: "number",
+                message: " What is the base salary of this role?"
+            },
+            {
+                name: "department_id",
+                type: "number",
+                message: "Which department ID should be assigned?"
+            }
+        ]
+    ).then(function(answer){
+        connection.query(
             "INSERT INTO roles SET ?",
             {
-                id: answer.employee_titleid,
-                title: answer.employee_title,
-                salary: answer.employee_salary,
-                department_id: answer.employee_dptid
-            },
-            "INSERT INTO department SET ?",
-            {
-                id: answer.employee_dptid,
-                name: answer.employee_dpt
-            },
-            //console.log("Success");
-            function(err) {
-                if (err) throw err;
-                console.log(err);
-                console.log("Something went wrong adding new hire");
-                //re-prompt
-                start();
-            });
+                id: answer.role_id,
+                title: answer.role_name,
+                salary: answer.salary,
+                department_id: answer.department_id
+            }
+        );
+        console.log("New role has been added to the database");
+        runSearch();
     });
 }
+function addDepartment(){}
 
 function rmEmployee() {}
 function updateRole() {}
