@@ -1,5 +1,6 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
+const figlet = require("figlet");
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -11,8 +12,13 @@ const connection = mysql.createConnection({
 
 connection.connect(function (err) {
     if (err) throw err;
-    runSearch();
+    init();
 });
+
+function init(){
+    console.log("\nWELCOME TO THE NEW EMS\n");
+    runSearch();
+}
 
 function runSearch() {
     inquirer.prompt(
@@ -23,7 +29,7 @@ function runSearch() {
             choices: [
                 "View all employees",
                 "View all employees by department",
-                "View all employees by manager",
+                "View all employees ordered by manager",
                 "Add a new item (employee, role, or department)",
                 "Remove Employee",
                 "Update Employee Role"
@@ -39,7 +45,7 @@ function runSearch() {
                 emplByDept();
                 break;
 
-            case "View all employees by manager":
+            case "View all employees ordered by manager":
                 emplByMgr();
                 break;
 
