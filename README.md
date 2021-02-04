@@ -7,9 +7,9 @@
 Easy to use CLI interface designed for organizations to manage and track employee information. The application is a simple CMS that has been built with node, inquirer and MySQL technologies.
 
 Screenshot of application:
-![Screenshot](./)
+![Screenshot](./Assets/EMS.png)
 
-To watch a screencast of the running application, please click here: [Screencast](https:)
+To watch a screencast of the running application, please click here: [Screencast](https://drive.google.com/file/d/1uvXVqbCusxT-nlAFcyctf6kmRpy8fC-t/view)
 
 ## Table of Contents
 
@@ -27,6 +27,7 @@ To install, simply clone or download the repository. Keep in mind that you may n
 This application allows an organization or business owners to easily manage their workforce database and create new entries for newly hired employees. It allows the user to:
 - Add departments, roles, employees
 - View departments, roles, employees
+- Remove an employee from the database
 - Update employee roles
 
 ## Contributing
