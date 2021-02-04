@@ -29,3 +29,5 @@ CREATE TABLE employee(
 -- SELECT * FROM employee; --
 -- SELECT * FROM roles; --
 -- SELECT * FROM department; --
+
+SELECT COUNT(id) FROM employee;

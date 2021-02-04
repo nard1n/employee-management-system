@@ -16,8 +16,10 @@ connection.connect(function (err) {
 });
 
 function init(){
-    console.log("\nWELCOME TO THE NEW EMS\n");
-    runSearch();
+    figlet("\nEMPLOYEE\nMANAGER", function(err, data){
+        console.log(data);
+        runSearch();
+    });   
 }
 
 function runSearch() {
@@ -169,7 +171,7 @@ function addEmployee(){
                     role_id: answer.employee_role,
                     manager_id: answer.employee_manager
                 });
-                console.log("New employee has been added to the database");
+                console.log("\nNew employee has been added to the database\n");
                 runSearch();
         });
 }
@@ -208,7 +210,7 @@ function addRole(){
                 department_id: answer.department_id
             }
         );
-        console.log("New role has been added to the database");
+        console.log("\nNew role has been added to the database\n");
         runSearch();
     });
 }
@@ -218,7 +220,7 @@ function addDepartment(){
         {
             name: "dpt_name",
             type: "input",
-            message: "What is the name of the new department?"
+            message: "\nWhat is the name of the new department?\n"
         },
         {
             name: "dpt_id",
@@ -233,20 +235,12 @@ function addDepartment(){
                 dpt_name: answer.dpt_name
             }
         );
-        console.log("New department has been added to the database");
+        console.log("\nNew department has been added to the database\n");
         runSearch();
     });
 }
 
 function rmEmployee() {
-        // make it async wiht const { verify } = await inquirer.prompt({
-        //     name: "confirm",
-        //     type: "confirm",
-        //     message: "Are you sure you want to permanently remove an employee?",
-        //     default: false
-        // });
-        // if (!verify.name.confirm) {
-        //     //function emplToDlt () {
 
         inquirer.prompt([
             {
@@ -269,7 +263,7 @@ function rmEmployee() {
                     last_name: answer.last_name
                 }]
             );
-        console.log("Employee has been removed from database");
+        console.log("\nCheck the database to confirm deletion\n");
         runSearch();
     });
 }
@@ -304,7 +298,7 @@ function updateRole() {
                 last_name: answer.last_name
             }]
         );
-        console.log("Employee role has been updated");
+        console.log("\nEmployee role has been updated\n");
         runSearch();
     });
 }
